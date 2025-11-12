@@ -88,11 +88,11 @@ const About = () => {
               
               {/* Photo placeholder - Profile/About photo */}
               <div className="relative mb-8 lg:mb-12">
-                <div className="relative w-full aspect-square max-w-[300px] mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-elegant border-2 border-gray-200/50">
+                <div className="relative w-full aspect-square max-w-[300px] mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-elegant border-2 border-gray-200/50 transition-transform duration-300 hover:scale-x-[1.1] hover:scale-y-[0.75]">
                   <img
                     src="/images/headshot.jpg"
                     alt="Nag Ediga"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300"
                   />
                   {/* Decorative overlay */}
                   <div className="absolute inset-0 bg-berkeley-blue/5 pointer-events-none"></div>

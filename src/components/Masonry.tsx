@@ -285,7 +285,6 @@ const Masonry: React.FC<MasonryProps> = ({
     >
       {grid.map(item => {
         const isExpanded = expandedProject === item.id;
-        const hasContent = item.title || item.description || item.longDescription;
         
         return (
           <div
