@@ -116,6 +116,17 @@ const Contact = () => {
               </svg>
             </a>
           </div>
+
+          <p className="pt-12 text-sm font-sans text-gray-400 hover:text-gray-600 transition-colors duration-300">
+            <a
+              href="https://github.com/stephenhungg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-transparent hover:decoration-current"
+            >
+              Made by Stephen Hung
+            </a>
+          </p>
         </div>
       </div>
     </section>
