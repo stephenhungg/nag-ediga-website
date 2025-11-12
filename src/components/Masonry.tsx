@@ -264,9 +264,17 @@ const Masonry: React.FC<MasonryProps> = ({
     }
   };
 
-  const handleCardClick = (id: string) => {
+  const handleCardClick = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent event from bubbling to container
     if (onProjectClick) {
       onProjectClick(id);
+    }
+  };
+
+  const handleContainerClick = () => {
+    // Close expanded project when clicking outside cards
+    if (expandedProject && onProjectClick) {
+      onProjectClick(expandedProject);
     }
   };
 
@@ -282,6 +290,7 @@ const Masonry: React.FC<MasonryProps> = ({
       ref={containerRef} 
       className="relative w-full overflow-hidden" 
       style={{ minHeight: `${containerHeight}px` }}
+      onClick={handleContainerClick}
     >
       {grid.map(item => {
         const isExpanded = expandedProject === item.id;
@@ -292,7 +301,7 @@ const Masonry: React.FC<MasonryProps> = ({
             data-key={item.id}
             className="absolute box-content cursor-pointer"
             style={{ willChange: 'transform, width, height, opacity' }}
-            onClick={() => handleCardClick(item.id)}
+            onClick={(e) => handleCardClick(item.id, e)}
             onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
             onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
           >
