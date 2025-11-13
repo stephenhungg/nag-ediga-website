@@ -295,7 +295,7 @@ const Projects = () => {
       id: '6',
       title: 'Unmanned Surface Vehicle',
       description: 'Autonomous surface vehicle for oceanographic data collection from lakes',
-      img: '/images/IMG_9552.jpg',
+      img: '/images/USV.jpg',
       images: [
         '/images/IMG_9552.jpg',
         '/images/IMG_9556.jpg',
