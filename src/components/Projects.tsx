@@ -400,8 +400,9 @@ const Projects = () => {
       id: '8',
       title: 'Vending Machine',
       description: 'Modular acrylic vending machine with compartmentalized storage and automated dispensing system',
-      img: '/images/IMG_9630.JPG',
+      img: '/images/IMG_2413.JPG',
       images: [
+        '/images/IMG_2413.JPG',
         '/images/IMG_9630.JPG',
         '/images/IMG_2397.JPG',
       ],

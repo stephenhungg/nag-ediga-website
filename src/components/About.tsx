@@ -90,7 +90,7 @@ const About = () => {
               <div className="relative mb-8 lg:mb-12">
                 <div className="relative w-full aspect-square max-w-[300px] mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-elegant border-2 border-gray-200/50 transition-transform duration-300 hover:scale-x-[1.1] hover:scale-y-[0.75]">
                   <img
-                    src="/images/headshot.jpg"
+                    src="/images/IMG_0223.jpg"
                     alt="Nag Ediga"
                     className="w-full h-full object-cover transition-transform duration-300"
                   />
@@ -115,21 +115,19 @@ const About = () => {
           <div className="lg:col-span-8 lg:pl-8">
             <div className="space-y-10 text-lg sm:text-xl font-sans text-gray-700 leading-relaxed font-light">
               <p className="relative pl-8 border-l-2 border-california-gold/30">
-                I am a <span className="font-medium text-berkeley-blue">mechanical engineering</span> student passionate about designing and building
-                innovative solutions to complex problems. My work focuses on combining <span className="font-medium text-california-gold">theoretical
-                knowledge</span> with <span className="font-medium text-berkeley-blue">practical applications</span> to create meaningful engineering solutions.
+                Hey! I'm a <span className="font-medium text-berkeley-blue">Mechanical Engineering</span> student at Cal, and I'm passionate about applying my skills to solve problems with <span className="font-medium text-california-gold">real impact</span>, and engineering gives me the space to do both. These days, I'm working on projects that combine <span className="font-medium text-berkeley-blue">CAD</span>, <span className="font-medium text-california-gold">FEA</span>, <span className="font-medium text-berkeley-blue">PCB design</span>, <span className="font-medium text-california-gold">embedded systems</span>, and <span className="font-medium text-berkeley-blue">practical design choices</span> to turn ideas into real products. Email me if you want to connect!
               </p>
               
-              <p className="relative pl-8 border-l-2 border-california-gold/30">
-                Through my studies and projects, I have developed expertise in <span className="font-medium text-berkeley-blue">CAD design</span>, <span className="font-medium text-california-gold">material
-                science</span>, <span className="font-medium text-berkeley-blue">thermodynamics</span>, and <span className="font-medium text-california-gold">mechanical systems analysis</span>. I am constantly learning and
-                exploring new technologies and methodologies in the field of mechanical engineering.
-              </p>
-              
-              <p className="relative pl-8 border-l-2 border-california-gold/30">
-                This portfolio showcases some of my recent projects and work, demonstrating my
-                approach to <span className="font-medium text-berkeley-blue">problem-solving</span> and my commitment to <span className="font-medium text-california-gold">excellence</span> in engineering design.
-              </p>
+              {/* Images */}
+              <div className="relative pl-8 border-l-2 border-california-gold/30 mt-10">
+                <div className="relative rounded-2xl overflow-hidden shadow-elegant border-2 border-gray-200/50 max-w-2xl">
+                  <img
+                    src="/images/IMG_0078.jpg"
+                    alt="Nag Ediga"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
