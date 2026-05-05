@@ -96,7 +96,7 @@ const Gallery = () => {
     <section
       id="gallery"
       ref={sectionRef}
-      className="relative min-h-screen bg-white px-4 sm:px-6 lg:px-8 py-24 overflow-hidden abstract-pattern"
+      className="relative min-h-screen bg-white px-4 sm:px-6 lg:px-8 pt-32 pb-24 overflow-hidden abstract-pattern"
     >
       <AnimatedGrid opacity={0.07} color="#003262" size={60} />
 
@@ -132,22 +132,6 @@ const Gallery = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         )}
       >
-        <div className="relative mb-16">
-          <div className="absolute -left-8 -top-8 lg:-left-16 lg:-top-12 text-[220px] lg:text-[320px] font-serif italic text-berkeley-blue/5 leading-none select-none z-0">
-            04
-          </div>
-
-          <div className="relative z-10 max-w-3xl">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-medium text-gray-900 mb-6 tracking-tight">
-              <span className="italic">Gallery</span>
-            </h2>
-            <div className="w-20 h-1.5 bg-berkeley-blue mb-8 rounded-full"></div>
-            <p className="text-lg sm:text-xl font-sans text-gray-700 font-light">
-              A full visual archive of builds, prototypes, tests, and engineering details.
-            </p>
-          </div>
-        </div>
-
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-5 [column-fill:_balance]">
           {galleryImages.map((image) => (
             <button
