@@ -4,9 +4,11 @@ import { cn } from '@/lib/utils';
 
 interface NavbarProps {
   triggerAnimation?: boolean;
+  currentPage?: 'home' | 'gallery';
+  onNavigate?: (page: 'home' | 'gallery', sectionId?: string) => void;
 }
 
-const Navbar = ({ triggerAnimation = false }: NavbarProps) => {
+const Navbar = ({ triggerAnimation = false, currentPage = 'home', onNavigate }: NavbarProps) => {
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,8 +34,13 @@ const Navbar = ({ triggerAnimation = false }: NavbarProps) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
+      if (currentPage === 'gallery') {
+        setActiveSection('gallery');
+        return;
+      }
+
       // Determine active section based on scroll position
-      const sections = ['home', 'about', 'projects', 'gallery', 'contact'];
+      const sections = ['home', 'about', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -49,14 +56,17 @@ const Navbar = ({ triggerAnimation = false }: NavbarProps) => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [currentPage]);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (sectionId === 'gallery') {
+      onNavigate?.('gallery');
+      return;
     }
+
+    onNavigate?.('home', sectionId);
   };
 
   const navItems = [
