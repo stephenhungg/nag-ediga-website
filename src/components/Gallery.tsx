@@ -17,7 +17,6 @@ const galleryImages: GalleryImage[] = [
   { src: '/images/How I built it.png', alt: 'Build process' },
   { src: '/images/IMG_0078.jpg', alt: 'Project and team photo' },
   { src: '/images/IMG_0211.jpg', alt: 'Project photo' },
-  { src: '/images/IMG_0223.jpg', alt: 'Portrait photo' },
   { src: '/images/IMG_2397.JPG', alt: 'Vending machine prototype' },
   { src: '/images/IMG_2413.JPG', alt: 'Vending machine assembly' },
   { src: '/images/IMG_2479.jpg', alt: 'Helping Hand prototype' },
