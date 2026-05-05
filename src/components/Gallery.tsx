@@ -14,7 +14,6 @@ const galleryImages: GalleryImage[] = [
   { src: '/images/Componentsinbox.jpg', alt: 'Components in box' },
   { src: '/images/graphofHHresults.png', alt: 'Helping Hand results graph' },
   { src: '/images/headphone-mount-how-built.png', alt: 'Headphone mount build process' },
-  { src: '/images/headshot.jpg', alt: 'Headshot' },
   { src: '/images/How I built it.png', alt: 'Build process' },
   { src: '/images/IMG_0078.jpg', alt: 'Project and team photo' },
   { src: '/images/IMG_0211.jpg', alt: 'Project photo' },
