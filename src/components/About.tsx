@@ -106,7 +106,7 @@ const About = () => {
                 className="hidden lg:block absolute top-32 -right-8 text-2xl font-serif italic text-berkeley-blue/8 select-none"
                 style={{ transform: 'rotate(90deg)', transformOrigin: 'center' }}
               >
-                MECHANICAL
+                ME + EECS
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ const About = () => {
           <div className="lg:col-span-8 lg:pl-8">
             <div className="space-y-10 text-lg sm:text-xl font-sans text-gray-700 leading-relaxed font-light">
               <p className="relative pl-8 border-l-2 border-california-gold/30">
-                Hey! I'm a <span className="font-medium text-berkeley-blue">Mechanical Engineering</span> student at Cal, and I'm passionate about applying my skills to solve problems with <span className="font-medium text-california-gold">real impact</span>, and engineering gives me the space to do both. These days, I'm working on projects that combine <span className="font-medium text-berkeley-blue">CAD</span>, <span className="font-medium text-california-gold">FEA</span>, <span className="font-medium text-berkeley-blue">PCB design</span>, <span className="font-medium text-california-gold">embedded systems</span>, and <span className="font-medium text-berkeley-blue">practical design choices</span> to turn ideas into real products. Email me if you want to connect!
+                Hey! I'm studying <span className="font-medium text-berkeley-blue">Mechanical Engineering</span> and <span className="font-medium text-berkeley-blue">EECS</span> at Cal, and I'm passionate about applying my skills to solve problems with <span className="font-medium text-california-gold">real impact</span>. These days, I'm working on projects that combine <span className="font-medium text-berkeley-blue">CAD</span>, <span className="font-medium text-california-gold">FEA</span>, <span className="font-medium text-berkeley-blue">PCB design</span>, <span className="font-medium text-california-gold">embedded systems</span>, and <span className="font-medium text-berkeley-blue">practical design choices</span> to turn ideas into real products. Email me if you want to connect!
               </p>
               
               {/* Images */}

@@ -54,6 +54,7 @@ const Home = ({ triggerAnimation = false }: HomeProps) => {
         <div
           ref={contentRef}
           className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
+          style={{ opacity: 0 }}
         >
           <div className="text-center max-w-4xl mx-auto px-8">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-medium text-white mb-8 tracking-tight">

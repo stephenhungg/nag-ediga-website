@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Masonry from './Masonry';
 import ProjectModal from './ProjectModal';
-import { FloatingCircle, FloatingLine, GearFragment, DiagonalDivider } from './AbstractElements';
 import AnimatedGrid from './AnimatedGrid';
 
 interface Project {
@@ -33,7 +31,6 @@ interface Project {
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [expandedProject, setExpandedProject] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -498,119 +495,196 @@ const Projects = () => {
       ],
       links: [],
     },
+    {
+      id: '10',
+      title: 'Li-ion Battery Capacity Degradation',
+      description: 'Machine learning project predicting future battery capacity degradation from NASA cycling data',
+      img: '/images/battery-fancy-result.png',
+      images: [
+        '/images/battery-fancy-result.png',
+        '/images/battery-model-r2-comparison.png',
+        '/images/battery-predicted-vs-actual.png',
+        '/images/battery-feature-importance.png',
+      ],
+      url: 'https://battery-capacity-degradation.vercel.app/#results',
+      height: 400,
+      category: 'Machine Learning',
+      technologies: ['Python', 'Scikit-learn', 'Random Forest', 'Ridge Regression', 'MLP', 'Data Cleaning', 'Feature Engineering'],
+      longDescription: 'Built a supervised machine learning pipeline to predict Li-ion battery capacity degradation using cleaned discharge cycles from the NASA PCoE Li-ion Battery Aging Dataset. The goal was to forecast future discharge capacity in amp-hours, which acts as a direct state-of-health signal for battery reliability, maintenance planning, and replacement decisions. Each cycle was converted into engineered voltage, current, temperature, ambient temperature, time, and cycle-history features, then split chronologically so models trained on earlier cycles and tested on later degradation behavior. I compared linear regression, Ridge regression, Random Forest, and an MLP neural network under the same validation/test protocol. Random Forest achieved the strongest held-out test performance with R2 = 0.885, RMSE = 0.0690 Ah, and MAE = 0.0502 Ah, showing that nonlinear tabular models captured aging behavior better than linear baselines.',
+      specifications: {
+        'Dataset': 'NASA PCoE Li-ion Battery Aging Dataset',
+        'Cleaned Discharge Cycles': '2305',
+        'Train / Val / Test': '1600 / 343 / 362 examples',
+        'Best Model': 'Random Forest',
+        'Test R2': '0.885',
+        'Test RMSE': '0.0690 Ah',
+        'Test MAE': '0.0502 Ah',
+      },
+      process: [
+        {
+          step: 'Dataset Cleaning',
+          description: 'Filtered the NASA cycling records to valid discharge cycles with realistic capacity values between 1.0 and 2.1 Ah. Structured each discharge cycle as one supervised regression example so the model predicted measured capacity from cycle-level behavior.',
+        },
+        {
+          step: 'Feature Engineering',
+          description: 'Created cycle-history, voltage, current, temperature, ambient temperature, discharge duration, and row-count summary features. These features captured both where the cell was in its aging timeline and how electrical/thermal behavior changed as capacity faded.',
+        },
+        {
+          step: 'Chronological Validation',
+          description: 'Used a chronological split within each battery: early cycles for training, middle cycles for validation, and later cycles for testing. Scaling was fit on training data only to avoid leakage into validation or test performance.',
+        },
+        {
+          step: 'Model Comparison',
+          description: 'Trained Linear Regression, Ridge Regression, Random Forest, and an MLP Neural Network. Random Forest delivered the best test R2 and RMSE, while the MLP produced a strong MAE result, confirming that nonlinear models handled capacity fade more effectively.',
+        },
+        {
+          step: 'Error Analysis',
+          description: 'Evaluated residuals, feature importance, predicted-vs-actual scatter, and ablations. The main failure mode was late-cycle prediction, where degradation becomes more structured and difficult near lower capacity.',
+        },
+      ],
+      links: [
+        {
+          label: 'View Project Site',
+          url: 'https://battery-capacity-degradation.vercel.app/#results',
+          icon: 'demo',
+        },
+      ],
+    },
+    {
+      id: '11',
+      title: 'Automatic Yarn Spool Holder',
+      description: 'Mechanically constrained spool-holder assembly with GD&T-controlled interfaces for repeatable manufacturing',
+      img: '/images/yarn-spool-gdt-drawing.png',
+      images: [
+        '/images/yarn-spool-gdt-drawing.png',
+      ],
+      url: '#',
+      height: 400,
+      category: 'Mechanical Design',
+      technologies: ['Onshape', 'GD&T', 'Tolerance Stackups', 'Datum Schemes', 'Mechanical Drawings', 'DFM', 'Assembly Design'],
+      longDescription: 'Designed an automatic yarn spool holder assembly with an emphasis on manufacturability, repeatable assembly, and clear inspection requirements. The project centered on translating a multi-part CAD concept into production-ready engineering documentation using GD&T rather than relying only on nominal dimensions. I created detailed drawings for major components including the system arm, central piece, bar, and primary part studio, defining datum structures, critical hole locations, functional interfaces, and tolerance zones so mating parts could assemble consistently. A major focus was controlling the spool axis, arm pivots, supports, and mounting interfaces so the holder could maintain alignment while allowing smooth yarn feed behavior. The GD&T work helped communicate which surfaces and holes actually drive function, which features could tolerate looser manufacturing variation, and how each part should be inspected after fabrication.',
+      specifications: {
+        'Project Type': 'Automatic yarn spool holder assembly',
+        'Primary Focus': 'GD&T and manufacturable documentation',
+        'Key Drawings': 'System arm, central piece, part studio, and bar',
+        'Functional Controls': 'Datum references, hole position, coaxial alignment, interface dimensions',
+        'Manufacturing Goal': 'Repeatable assembly with clear inspection requirements',
+      },
+      process: [
+        {
+          step: 'Assembly Architecture',
+          description: 'Modeled the spool-holder system as a multi-part mechanical assembly with spool supports, central rotating elements, arms, bars, and mounting interfaces. The design required the spool axis and support structure to remain aligned while still leaving room for moving or replaceable yarn-feed components.',
+        },
+        {
+          step: 'Datum Strategy',
+          description: 'Defined datum features around the surfaces and axes that control real assembly behavior. Instead of dimensioning everything from arbitrary edges, the drawings use datum references to communicate how parts should be located, clamped, and inspected relative to their functional interfaces.',
+        },
+        {
+          step: 'GD&T Controls',
+          description: 'Applied GD&T to constrain critical holes, slots, pin interfaces, central supports, and arm features. Position tolerances and referenced datums were used to protect fit between the bars, arms, and central piece, while less critical geometry was left with looser conventional tolerances.',
+        },
+        {
+          step: 'Tolerance and Fit Thinking',
+          description: 'Considered how tolerance stackup could affect spool alignment, support stability, and assembly repeatability. Features tied to rotation, fastening, and mating interfaces were prioritized because small errors there could compound across the holder and create binding or misalignment.',
+        },
+        {
+          step: 'Production Drawings',
+          description: 'Created detailed GD&T drawings for the system arm, central piece, bar, and main part studio. The drawing set communicates dimensions, datums, tolerance frames, hole callouts, and inspection intent so the design can move beyond CAD geometry into a manufacturable package.',
+        },
+      ],
+      links: [
+        {
+          label: 'System Arm GD&T',
+          url: '/images/gdt-system-arm.pdf',
+          icon: 'download',
+        },
+        {
+          label: 'Central Piece GD&T',
+          url: '/images/gdt-central-piece.pdf',
+          icon: 'download',
+        },
+        {
+          label: 'Part Studio GD&T',
+          url: '/images/gdt-part-studio-1.pdf',
+          icon: 'download',
+        },
+        {
+          label: 'Bar GD&T',
+          url: '/images/gdt-bar-1.pdf',
+          icon: 'download',
+        },
+      ],
+    },
   ];
 
-  const filteredProjects = projects;
+  const priorityProjectIds = ['9', '5', '1', '6'];
+  const hiddenProjectIds = new Set(['2', '4']);
+  const visibleProjects = projects
+    .filter((project) => !hiddenProjectIds.has(project.id))
+    .sort((a, b) => {
+      const aIndex = priorityProjectIds.indexOf(a.id);
+      const bIndex = priorityProjectIds.indexOf(b.id);
 
-  const masonryItems = filteredProjects.map(project => ({
-    id: project.id,
-    img: project.img,
-    url: '#',
-    height: project.height,
-    title: project.title,
-    description: project.description,
-    longDescription: project.longDescription,
-  }));
+      if (aIndex === -1 && bIndex === -1) return 0;
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    });
 
   return (
     <section
       id="projects"
       ref={sectionRef}
-      className="relative min-h-screen bg-white px-4 sm:px-6 lg:px-8 py-24 overflow-hidden abstract-pattern"
+      className="relative min-h-screen bg-white px-4 sm:px-6 lg:px-8 py-24 overflow-hidden"
     >
-      {/* Animated Grid Background */}
       <AnimatedGrid opacity={0.08} color="#003262" size={60} />
-      
-      {/* Abstract Background Elements */}
-      <FloatingCircle 
-        size={450} 
-        position={{ top: '-5%', right: '5%' }} 
-        rotation={60}
-        opacity={0.07}
-        color="#003262"
-      />
-      <FloatingLine 
-        length={700} 
-        position={{ top: '20%', left: '-8%' }} 
-        rotation={-30}
-        opacity={0.1}
-        color="#003262"
-      />
-      <GearFragment 
-        size={140} 
-        position={{ top: '10%', left: '5%' }} 
-        rotation={-15}
-        opacity={0.06}
-        color="#003262"
-      />
-      <GearFragment 
-        size={90} 
-        position={{ bottom: '20%', right: '10%' }} 
-        rotation={40}
-        opacity={0.05}
-        color="#FDB515"
-      />
 
-      {/* Diagonal Divider at top */}
-      <div className="absolute top-0 left-0 right-0 z-0">
-        <DiagonalDivider direction="left" color="#003262" opacity={0.15} />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Overlapping Header */}
-        <div className="relative mb-20">
-          {/* Oversized decorative number behind */}
-          <div className="absolute -left-8 -top-8 lg:-left-16 lg:-top-12 text-[250px] lg:text-[350px] font-serif italic text-berkeley-blue/5 leading-none select-none z-0">
-            03
-          </div>
-          
-          {/* Header content overlapping */}
-          <div className="relative z-10">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-medium text-gray-900 mb-6 tracking-tight relative">
-              <span className="italic">Projects</span>
-              {/* Rotated decorative text */}
-              <span 
-                className="absolute -right-8 top-1/2 -translate-y-1/2 text-2xl lg:text-3xl font-serif italic text-berkeley-blue/8 select-none hidden lg:block"
-                style={{ transform: 'translateY(-50%) rotate(90deg)', transformOrigin: 'center' }}
-              >
-                PORTFOLIO
-              </span>
-            </h2>
-            
-            <div className="w-20 h-1.5 bg-berkeley-blue mb-8 rounded-full"></div>
-          </div>
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="mb-10 border-b border-gray-200 pb-5">
+          <p className="text-sm font-sans font-semibold uppercase tracking-[0.18em] text-berkeley-blue">
+            Projects
+          </p>
+          <h2 className="mt-3 text-4xl sm:text-5xl font-serif font-medium text-gray-950 tracking-tight">
+            Selected Engineering Work
+          </h2>
         </div>
 
-        {/* Masonry Grid */}
-        {isVisible && (
-          <div className="relative z-10">
-            <Masonry
-              items={masonryItems}
-              ease="power3.out"
-              duration={0.6}
-              stagger={0.05}
-              animateFrom="bottom"
-              scaleOnHover={true}
-              hoverScale={0.95}
-              blurToFocus={true}
-              colorShiftOnHover={false}
-              expandedProject={expandedProject}
-              onProjectClick={(id) => {
-                setExpandedProject(expandedProject === id ? null : id);
-                const project = filteredProjects.find(p => p.id === id);
-                if (project) setSelectedProject(project);
-              }}
-            />
-          </div>
-        )}
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          {visibleProjects.map((project) => (
+            <button
+              key={project.id}
+              type="button"
+              onClick={() => setSelectedProject(project)}
+              className="group relative block aspect-[4/3] overflow-hidden rounded-lg bg-gray-100 text-left shadow-subtle transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant focus:outline-none focus:ring-2 focus:ring-berkeley-blue/50"
+              aria-label={`Open ${project.title}`}
+            >
+              <img
+                src={project.img}
+                alt={project.title}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
+              <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                <p className="mb-2 text-xs font-sans font-semibold uppercase tracking-[0.16em] text-california-gold">
+                  {project.category}
+                </p>
+                <h3 className="text-2xl font-serif font-medium leading-tight">
+                  {project.title}
+                </h3>
+                <p className="mt-3 line-clamp-2 text-sm font-sans text-gray-200">
+                  {project.description}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Diagonal Divider at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-0">
-        <DiagonalDivider direction="right" color="#003262" opacity={0.15} />
-      </div>
-
-      {/* Project Modal */}
       {selectedProject && (
         <ProjectModal
           project={selectedProject}

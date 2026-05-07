@@ -121,42 +121,46 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
           </svg>
         </button>
 
+        <div className="bg-gray-950 px-4 pt-20 pb-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            {project.category && (
+              <span className="inline-block px-4 py-1.5 text-sm font-medium text-white bg-berkeley-blue rounded-full mb-4">
+                {project.category}
+              </span>
+            )}
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-3 tracking-tight">
+              {project.title}
+            </h2>
+            <p className="max-w-3xl text-xl text-gray-200 font-sans">
+              {project.description}
+            </p>
+          </div>
+        </div>
+
         {/* Image Gallery Section */}
-        <div className="relative w-full h-[60vh] bg-black">
-          {/* Main Image */}
+        <div className="relative w-full h-[72vh] min-h-[520px] bg-black overflow-hidden">
+          <img
+            key={`${currentImageIndex}-background`}
+            src={allImages[currentImageIndex]}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-25 blur-2xl scale-110"
+          />
+          <div className="absolute inset-0 bg-black/45" />
+
           <img
             key={currentImageIndex}
             src={allImages[currentImageIndex]}
             alt={`${project.title} - Image ${currentImageIndex + 1}`}
-            className="w-full h-full object-cover"
+            className="relative z-10 h-full w-full object-contain p-4 sm:p-6 lg:p-8"
           />
-
-          {/* Image Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
-
-          {/* Title Overlay on Image */}
-          <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
-            <div className="max-w-6xl mx-auto">
-              {project.category && (
-                <span className="inline-block px-4 py-1.5 text-sm font-medium text-white bg-berkeley-blue rounded-full mb-4">
-                  {project.category}
-                </span>
-              )}
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-3 tracking-tight">
-                {project.title}
-              </h2>
-              <p className="text-xl text-gray-200 font-sans">
-                {project.description}
-              </p>
-            </div>
-          </div>
 
           {/* Navigation Arrows (only show if multiple images) */}
           {allImages.length > 1 && (
             <>
               <button
                 onClick={handlePrevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all duration-200 text-white"
+                className="absolute left-4 top-1/2 z-20 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/55 hover:bg-black/75 backdrop-blur-sm transition-all duration-200 text-white"
                 aria-label="Previous image"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +169,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               </button>
               <button
                 onClick={handleNextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all duration-200 text-white"
+                className="absolute right-4 top-1/2 z-20 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/55 hover:bg-black/75 backdrop-blur-sm transition-all duration-200 text-white"
                 aria-label="Next image"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import LandingAnimation from './components/LandingAnimation';
 import Home from './components/Home';
 import About from './components/About';
+import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
@@ -11,10 +12,59 @@ type Page = 'home' | 'gallery';
 
 const getCurrentPage = (): Page => (window.location.pathname === '/gallery' ? 'gallery' : 'home');
 
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
+
+if (window.location.pathname !== '/gallery' && window.location.hash) {
+  window.history.replaceState({}, '', window.location.pathname);
+  window.scrollTo(0, 0);
+}
+
 function App() {
   const [currentPage, setCurrentPage] = useState(getCurrentPage);
   const [animationComplete, setAnimationComplete] = useState(() => getCurrentPage() === 'gallery');
   const [showContent, setShowContent] = useState(() => getCurrentPage() === 'gallery');
+
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    if (currentPage === 'home') {
+      window.scrollTo(0, 0);
+
+      if (window.location.hash) {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (currentPage !== 'home') return;
+
+    const clearHashAndScrollTop = () => {
+      if (window.location.hash) {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+      window.scrollTo(0, 0);
+    };
+
+    clearHashAndScrollTop();
+    window.addEventListener('hashchange', clearHashAndScrollTop);
+
+    return () => window.removeEventListener('hashchange', clearHashAndScrollTop);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (currentPage !== 'home' || animationComplete) return;
+
+    const scrollLock = window.setInterval(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+
+    return () => window.clearInterval(scrollLock);
+  }, [animationComplete, currentPage]);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -48,12 +98,24 @@ function App() {
     });
   };
 
+  const handleIntroHandoffStart = useCallback(() => {
+    window.scrollTo(0, 0);
+    setShowContent(true);
+  }, []);
+
+  const handleIntroComplete = useCallback(() => {
+    window.scrollTo(0, 0);
+    window.requestAnimationFrame(() => window.scrollTo(0, 0));
+    window.setTimeout(() => window.scrollTo(0, 0), 50);
+    setAnimationComplete(true);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Main content - always rendered, underneath animation initially */}
       <div className={showContent ? '' : 'invisible'}>
         <Navbar
-          triggerAnimation={showContent}
+          triggerAnimation={animationComplete || currentPage === 'gallery'}
           currentPage={currentPage}
           onNavigate={navigateToPage}
         />
@@ -62,8 +124,9 @@ function App() {
             <Gallery />
           ) : (
             <>
-              <Home triggerAnimation={showContent} />
+              <Home triggerAnimation={animationComplete} />
               <About />
+              <Experience />
               <Projects />
               <Contact />
             </>
@@ -74,10 +137,8 @@ function App() {
       {/* Landing animation - overlays content initially, then unmounts */}
       {currentPage === 'home' && !animationComplete && (
         <LandingAnimation
-          onComplete={() => {
-            setAnimationComplete(true);
-            setShowContent(true);
-          }}
+          onHandoffStart={handleIntroHandoffStart}
+          onComplete={handleIntroComplete}
         />
       )}
     </div>
