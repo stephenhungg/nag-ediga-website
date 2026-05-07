@@ -554,9 +554,13 @@ const Projects = () => {
       id: '11',
       title: 'Automatic Yarn Spool Holder',
       description: 'Mechanically constrained spool-holder assembly with GD&T-controlled interfaces for repeatable manufacturing',
-      img: '/images/yarn-spool-gdt-drawing.png',
+      img: '/images/yarn-spool-assembly.png',
       images: [
-        '/images/yarn-spool-gdt-drawing.png',
+        '/images/yarn-spool-assembly.png',
+        '/images/yarn-spool-gdt-system-arm.png',
+        '/images/yarn-spool-gdt-central-piece.png',
+        '/images/yarn-spool-gdt-part-studio.png',
+        '/images/yarn-spool-gdt-bar.png',
       ],
       url: '#',
       height: 400,
@@ -645,7 +649,7 @@ const Projects = () => {
             Projects
           </p>
           <h2 className="mt-3 text-4xl sm:text-5xl font-serif font-medium text-gray-950 tracking-tight">
-            Selected Engineering Work
+            Engineering Work
           </h2>
         </div>
 
